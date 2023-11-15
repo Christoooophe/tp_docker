@@ -6,10 +6,9 @@ services:
     image: python
     restart: unless-stopped
     container_name: api-beers
-    build:
-      dockerfile: ./api/Dockerfile
+    build: ./api
     ports:
-      - "80:80"
+      - "80:5000"
     depends_on:
       - db
 
@@ -17,8 +16,7 @@ services:
     image: mysql
     restart: unless-stopped
     container_name: db-beers
-    build:
-      dockerfile: ./sql/Dockerfile
+    build: ./sql/
     environment:
       MYSQL_ROOT_PASSWORD: "root"
       MYSQL_DATABASE: "beer"
