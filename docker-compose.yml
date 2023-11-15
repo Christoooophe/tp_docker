@@ -1,0 +1,27 @@
+version: '3.8'
+
+services:
+
+  api:
+    image: python
+    restart: unless-stopped
+    container_name: api-beers
+    build:
+      dockerfile: ./api/Dockerfile
+    ports:
+      - "80:80"
+    depends_on:
+      - db
+
+  db:
+    image: mysql
+    restart: unless-stopped
+    container_name: db-beers
+    build:
+      dockerfile: ./sql/Dockerfile
+    environment:
+      MYSQL_ROOT_PASSWORD: "root"
+      MYSQL_DATABASE: "beer"
+
+volumes:
+  db:
